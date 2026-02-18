@@ -1,13 +1,12 @@
 package routes
 
-import Application
+import ChatRequest
 import agent.AgentOrchestrator
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.Application
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.*
-import model.ChatRequest
-
 
 // Definiuje REST endpointy (I z SOLID — segregacja interfejsów przez route'y)
 fun Application.configureChatRoutes(orchestrator: AgentOrchestrator) {
