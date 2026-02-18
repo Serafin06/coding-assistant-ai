@@ -12,21 +12,24 @@ repositories {
 
 dependencies {
     implementation(project(":shared"))
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
 
     intellijPlatform {
-        // POPRAWKA: Używamy poprawnej nazwy parametru 'localPath' lub podajemy sam argument.
-        // Usuwamy też 'type.set', bo wersja lokalna jest wykrywana automatycznie.
-        local(localPath = "C:/Users/RGrabowski/AppData/Local/Programs/IntelliJ IDEA Community Edition 2025.2.3")
+        local("C:/Users/RGrabowski/AppData/Local/Programs/IntelliJ IDEA Community Edition 2025.2.3")
+        bundledPlugin("com.intellij.java")
+        instrumentationTools()
     }
 }
 
 intellijPlatform {
     pluginConfiguration {
         name = "AI Coding Assistant"
-        // Dostosowujemy zakres wersji do Twojej lokalnej instalacji (2025.2.3 -> build 252.*)
+        version = "0.0.1"
         ideaVersion {
             sinceBuild.set("252")
             untilBuild.set("253.*")
         }
     }
+    buildSearchableOptions = false
 }
