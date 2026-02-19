@@ -7,6 +7,7 @@ repositories {
     mavenCentral()
     intellijPlatform {
         defaultRepositories()
+        intellijDependencies()
     }
 }
 
@@ -16,7 +17,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
 
     intellijPlatform {
-        intellijIdeaCommunity("2025.2.3")
+        intellijIdeaCommunity("2024.3.2.1") // Zmieniamy z 2025.2.3 na stabilną 2024
         bundledPlugin("com.intellij.java")
         instrumentationTools()
     }
@@ -27,7 +28,7 @@ intellijPlatform {
         name = "AI Coding Assistant"
         version = "0.0.1"
         ideaVersion {
-            sinceBuild.set("252")
+            sinceBuild.set("243")
             untilBuild.set("253.*")
         }
     }

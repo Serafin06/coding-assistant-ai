@@ -1,5 +1,7 @@
 package services
 
+import ChatRequest
+import ChatResponse
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient

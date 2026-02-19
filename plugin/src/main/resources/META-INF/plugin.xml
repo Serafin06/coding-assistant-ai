@@ -10,7 +10,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="AI Assistant"
                     anchor="right"
-                    factoryClass="pl.rafapp.assistant.plugin.ui.AssistantToolWindowFactory"/>
+                    factoryClass="ui.AssistantToolWindowFactory"/>
     </extensions>
 
     <actions>
