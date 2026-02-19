@@ -16,7 +16,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
 
     intellijPlatform {
-        local("C:/Users/RGrabowski/AppData/Local/Programs/IntelliJ IDEA Community Edition 2025.2.3")
+        intellijIdeaCommunity("2025.2.3")
         bundledPlugin("com.intellij.java")
         instrumentationTools()
     }
