@@ -10,6 +10,8 @@ import dev.langchain4j.service.AiServices
 import dev.langchain4j.store.memory.chat.InMemoryChatMemoryStore
 import java.time.Duration
 import java.util.UUID
+import dev.langchain4j.model.ollama.OllamaStreamingChatModel
+import io.ktor.sse.*
 
 class AgentOrchestrator(private val config: OllamaConfig) {
 
@@ -38,19 +40,49 @@ class AgentOrchestrator(private val config: OllamaConfig) {
 
     fun respond(request: ChatRequest): ChatResponse {
         val conversationId = request.conversationId ?: UUID.randomUUID().toString()
-
-        val fullMessage = buildString {
-            if (!request.codeContext.isNullOrBlank()) {
-                append("Code context (${request.language ?: "unknown"}):\n```${request.language ?: ""}\n")
-                append(request.codeContext)
-                append("\n```\n\n")
-            }
-            append(request.message)
-        }
-
-        // AiServices automatycznie obsłuży pamięć na podstawie conversationId
-        val reply = aiService.chat(conversationId, fullMessage)
+        val reply = aiService.chat(conversationId, buildMessage(request))
         return ChatResponse(reply = reply, conversationId = conversationId)
+    }
+
+    // Dodaj pole obok istniejącego aiService:
+    private val streamingAiService: CodingAiService = AiServices.builder(CodingAiService::class.java)
+        .streamingChatLanguageModel(
+            OllamaStreamingChatModel.builder()
+                .baseUrl(config.baseUrl)
+                .modelName(config.modelName)
+                .temperature(config.temperature)
+                .timeout(Duration.ofMillis(config.timeout))
+                .build()
+        )
+        .chatMemoryProvider { memoryId ->
+            MessageWindowChatMemory.builder()
+                .id(memoryId)
+                .maxMessages(10)
+                .chatMemoryStore(memoryStore)
+                .build()
+        }
+        .build()
+
+    /** Streamuje odpowiedź token po tokenie przez callback */
+    fun streamRespond(request: ChatRequest, onToken: (String) -> Unit, onComplete: (String) -> Unit) {
+        val conversationId = request.conversationId ?: UUID.randomUUID().toString()
+        val fullMessage = buildMessage(request)
+
+        streamingAiService.chatStream(conversationId, fullMessage)
+            .onNext { token -> onToken(token) }
+            .onComplete { response -> onComplete(conversationId) }
+            .onError { error -> throw error }
+            .start()
+    }
+
+    // Wydziel budowanie wiadomości (DRY):
+    fun buildMessage(request: ChatRequest) = buildString {
+        if (!request.codeContext.isNullOrBlank()) {
+            append("Code context (${request.language ?: "unknown"}):\n```${request.language ?: ""}\n")
+            append(request.codeContext)
+            append("\n```\n\n")
+        }
+        append(request.message)
     }
 
     fun clearSession(conversationId: String) {

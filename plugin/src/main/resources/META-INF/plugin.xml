@@ -15,7 +15,7 @@
 
     <actions>
         <action id="AiAssistant.Ask"
-                class="plugin.actions.OpenAssistantAction"
+                class="actions.OpenAssistantAction"
                 text="Ask AI Assistant"
                 description="Send selected code to AI assistant">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>

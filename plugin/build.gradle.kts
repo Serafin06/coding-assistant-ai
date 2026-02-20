@@ -23,6 +23,7 @@ dependencies {
     // Klient do Twojego backendu (używamy OkHttp zgodnie z Twoim wyborem)
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+    implementation("com.squareup.okhttp3:okhttp-sse:4.12.0")
 
     intellijPlatform {
         intellijIdeaCommunity("2025.2.3")

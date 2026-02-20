@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75b7707c-a33f-4a11-bd04-f8f2b6a46459" name="Changes" comment="v 0.3">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+    <list default="true" id="75b7707c-a33f-4a11-bd04-f8f2b6a46459" name="Changes" comment="v 0.4">
+      <change beforePath="$PROJECT_DIR$/backend/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/agent/AgentOrchestrator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/agent/AgentOrchestrator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/agent/CodingAiService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/agent/CodingAiService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/kotlin/routes/ChatRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/kotlin/routes/ChatRoutes.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/services/BackendClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/services/BackendClient.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/ui/AssistantToolWindow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/ui/AssistantToolWindow.kt" afterDir="false" />
@@ -169,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771507604360</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="v 0.4">
+      <option name="closed" value="true" />
+      <created>1771587537606</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1771587537606</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -177,7 +187,8 @@
     <MESSAGE value="v 0.1" />
     <MESSAGE value="v 0.2" />
     <MESSAGE value="v 0.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="v 0.3" />
+    <MESSAGE value="v 0.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="v 0.4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

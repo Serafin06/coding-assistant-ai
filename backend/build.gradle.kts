@@ -21,6 +21,7 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:3.4.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.4.0")
     implementation("io.ktor:ktor-server-cors:3.4.0")
+    implementation("io.ktor:ktor-server-sse:3.4.0")
 
     implementation("dev.langchain4j:langchain4j:1.0.0-beta2")
     implementation("dev.langchain4j:langchain4j-ollama:1.0.0-beta2")
