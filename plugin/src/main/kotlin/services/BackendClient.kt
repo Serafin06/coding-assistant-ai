@@ -1,10 +1,12 @@
 package services
 
-import kotlinx.serialization.json.Json
+import ChatRequest
+import ChatResponse
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import kotlinx.serialization.json.Json
 import java.time.Duration
 
 

@@ -10,12 +10,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="AI Assistant"
                     anchor="right"
-                    factoryClass="pl.rafapp.assistant.plugin.ui.AssistantToolWindowFactory"/>
+                    factoryClass="ui.AssistantToolWindowFactory"/>
     </extensions>
 
     <actions>
         <action id="AiAssistant.Ask"
-                class="pl.rafapp.assistant.plugin.actions.OpenAssistantAction"
+                class="plugin.actions.OpenAssistantAction"
                 text="Ask AI Assistant"
                 description="Send selected code to AI assistant">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>

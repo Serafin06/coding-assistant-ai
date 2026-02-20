@@ -6,7 +6,7 @@ plugins {
     id("io.ktor.plugin") version "3.4.0" apply false
 
     // NOWY plugin do IntelliJ (wymagany dla Gradle 9.0 i IDEA 2025+)
-    id("org.jetbrains.intellij.platform") version "2.1.0" apply false
+    id("org.jetbrains.intellij.platform") version "2.11.0" apply false
 }
 
 allprojects {

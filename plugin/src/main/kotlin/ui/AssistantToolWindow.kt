@@ -1,5 +1,6 @@
 package ui
 
+import ChatRequest
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
@@ -8,7 +9,6 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import services.BackendClient
 import java.awt.BorderLayout
 import javax.swing.*
-
 
 // Panel boczny w IDE — odpowiada wyłącznie za UI
 class AssistantToolWindowFactory : ToolWindowFactory {
