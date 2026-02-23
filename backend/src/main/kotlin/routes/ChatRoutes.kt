@@ -2,41 +2,49 @@ package routes
 
 import ChatRequest
 import agent.AgentOrchestrator
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.Application
-import io.ktor.server.application.install
-import io.ktor.server.request.receive
-import io.ktor.server.response.respond
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.sse.*
 
-// Definiuje REST endpointy (I z SOLID — segregacja interfejsów przez route'y)
+/** Definiuje REST endpointy — segregacja interfejsów przez route'y (I z SOLID) */
 fun Application.configureChatRoutes(orchestrator: AgentOrchestrator) {
     install(SSE)
     routing {
         route("/api") {
+
             post("/chat") {
                 val request = call.receive<ChatRequest>()
                 val response = orchestrator.respond(request)
                 call.respond(HttpStatusCode.OK, response)
             }
 
-            // Nowy endpoint streamingowy
             post("/chat/stream") {
                 val request = call.receive<ChatRequest>()
-                call.response.headers.append("Content-Type", "text/event-stream")
-                call.response.headers.append("Cache-Control", "no-cache")
-                call.respondTextStream {
+                call.response.headers.append(HttpHeaders.ContentType, "text/event-stream")
+                call.response.headers.append(HttpHeaders.CacheControl, "no-cache")
+                call.respondTextWriter {
+                    val latch = java.util.concurrent.CountDownLatch(1)
                     orchestrator.streamRespond(
                         request = request,
                         onToken = { token ->
-                            write("data: ${token}\n\n")
+                            write("data: $token\n\n")
                             flush()
                         },
                         onComplete = { conversationId ->
                             write("data: [DONE]:$conversationId\n\n")
                             flush()
+                            latch.countDown()
+                        },
+                        onError = { error ->
+                            write("data: [ERROR]:${error.message}\n\n")
+                            flush()
+                            latch.countDown()
                         }
                     )
+                    latch.await()
                 }
             }
 
@@ -46,7 +54,7 @@ fun Application.configureChatRoutes(orchestrator: AgentOrchestrator) {
                 call.respond(HttpStatusCode.NoContent)
             }
 
-            get("/api/health") {
+            get("/health") {
                 call.respond(mapOf("status" to "ok"))
             }
         }

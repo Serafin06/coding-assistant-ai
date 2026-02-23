@@ -64,14 +64,19 @@ class AgentOrchestrator(private val config: OllamaConfig) {
         .build()
 
     /** Streamuje odpowiedź token po tokenie przez callback */
-    fun streamRespond(request: ChatRequest, onToken: (String) -> Unit, onComplete: (String) -> Unit) {
+    fun streamRespond(
+        request: ChatRequest,
+        onToken: (String) -> Unit,
+        onComplete: (String) -> Unit,
+        onError: (Throwable) -> Unit = {}
+    ) {
         val conversationId = request.conversationId ?: UUID.randomUUID().toString()
         val fullMessage = buildMessage(request)
 
         streamingAiService.chatStream(conversationId, fullMessage)
-            .onNext { token -> onToken(token) }
-            .onComplete { response -> onComplete(conversationId) }
-            .onError { error -> throw error }
+            .onPartialResponse { token -> onToken(token) }
+            .onCompleteResponse { _ -> onComplete(conversationId) }
+            .onError { error -> onError(error) }
             .start()
     }
 
